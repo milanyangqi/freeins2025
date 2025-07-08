@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      // 获取浏览器首选语言
+      var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      var supported = ['zh', 'en', 'es', 'vi', 'id', 'fr', 'ms', 'ar'];
+      var target = supported.find(l => lang.startsWith(l)) || 'en';
+      window.location.replace('/' + target);
+    </script>
+  </head>
+  <body>
+    <noscript>
+      请开启 JavaScript 以自动跳转到您的语言页面。
+    </noscript>
+  </body>
+</html> 
