@@ -3,8 +3,10 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { locales } from '@/lib/i18n';
 
+import { InferGetStaticParamsType } from 'next';
+
 type Props = {
-  params: { locale: string };
+  params: InferGetStaticParamsType<typeof generateStaticParams>;
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
