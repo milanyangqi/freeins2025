@@ -44,49 +44,39 @@ export default async function About({
         </div>
       </div>
 
-      {/* Company Info */}
-      <div className="py-16 bg-white">
+      {/* Company Introduction Section */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">{t('company')}</h2>
-              <p className="mt-4 text-lg text-gray-500">
-                {t('companyIntro')}
-              </p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('company')}</h2>
+              <p className="text-gray-600 mb-4">{t('companyIntro')}</p>
+              <p className="text-gray-600">{t('companyDescription')}</p>
             </div>
-            <div className="mt-8 lg:mt-0">
-              <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                <div className="h-64 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">{t('companyImagePlaceholder')}</span>
-                </div>
-              </div>
+            <div className="bg-gray-200 h-64 flex items-center justify-center">
+              {t('companyImagePlaceholder')}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Founder */}
-      <div className="py-16 bg-gray-50">
+      {/* Founder Section */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-            <div className="lg:order-2">
-              <h2 className="text-2xl font-bold text-gray-900">{t('founderTitle')}</h2>
-              <p className="mt-4 text-lg text-gray-500">
-                {t('founderDescription')}
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('founderTitle')}</h2>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">{t('founderName')}</h3>
+              <p className="text-gray-600">{t('founderDescription')}</p>
             </div>
-            <div className="mt-8 lg:mt-0 lg:order-1">
-              <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                <div className="h-64 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">{t('founderImagePlaceholder')}</span>
-                </div>
-              </div>
+            <div className="bg-gray-200 h-64 flex items-center justify-center order-1 md:order-2">
+              {t('founderImagePlaceholder')}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Philosophy & Values */}
+      {/* Philosophy Section */}
       <div className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
