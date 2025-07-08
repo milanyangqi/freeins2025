@@ -3,10 +3,14 @@ version: '3.3'
 services:
   web:
     build:
-      context: ./freeins-website
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: freeins-website/Dockerfile
     ports:
-      - "1899:1899"
+      - "3000:3000"
     environment:
       - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - ./freeins-website:/app
+      - /app/node_modules
     restart: unless-stopped

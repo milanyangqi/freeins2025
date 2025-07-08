@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { locales } from '@/lib/i18n';
+import { InferPageParamsType } from 'next-typesafe-url';
 
 type Props = {
   params: { locale: string };

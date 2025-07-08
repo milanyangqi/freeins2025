@@ -3,10 +3,8 @@ version: '3.3'
 services:
   web:
     build:
-      context: ./freeins-website
+      context: .
       dockerfile: Dockerfile
-    ports:
-      - "1899:1899"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
