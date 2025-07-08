@@ -3,11 +3,9 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { locales } from '@/lib/i18n';
 
-import type { SearchParams } from 'next/navigation';
-
 type Props = {
   params: { locale: string };
-  searchParams?: SearchParams;
+  searchParams?: { [key: string]: string | string[] | undefined };
 };
 
 // 预生成所有支持的语言路径
@@ -17,8 +15,7 @@ export function generateStaticParams() {
 
 // 这个函数会在服务器端运行，用于生成元数据
 export async function generateMetadata({ params }: Props) {
-  const resolvedParams = await Promise.resolve(params);
-  const locale = resolvedParams.locale;
+  const locale = params.locale;
   const t = await getTranslations({ locale, namespace: 'about' });
   return {
     title: `FreeIns - ${t('title')}`
