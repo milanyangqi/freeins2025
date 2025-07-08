@@ -3,8 +3,11 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { locales } from '@/lib/i18n';
 
+import type { SearchParams } from 'next/navigation';
+
 type Props = {
-  params: { locale: string }
+  params: { locale: string };
+  searchParams?: SearchParams;
 };
 
 // 预生成所有支持的语言路径
