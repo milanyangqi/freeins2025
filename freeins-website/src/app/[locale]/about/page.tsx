@@ -24,8 +24,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function About({ params }: Props) {
-  const resolvedParams = await Promise.resolve(params);
-  const locale = resolvedParams.locale;
+  const locale = params.locale;
   const t = await getTranslations({ locale, namespace: 'about' });
 
   return (
