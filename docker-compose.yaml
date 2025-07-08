@@ -1,10 +1,9 @@
 version: '3.3'
-
 services:
   web:
     build:
-      context: .
-      dockerfile: freeins-website/Dockerfile
+      context: ./freeins-website
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
