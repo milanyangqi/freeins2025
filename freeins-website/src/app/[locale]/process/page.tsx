@@ -1,37 +1,11 @@
+export const dynamic = 'force-dynamic';
 import { getTranslations } from 'next-intl/server';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ProcessStep from '@/components/ProcessStep';
-import { locales } from '@/lib/i18n';
 
-// 预生成所有支持的语言路径
-export function generateStaticParams(): { locale: string }[] {
-  return locales.map((locale) => ({ locale }));
-}
-
-// 这个函数会在服务器端运行，用于生成元数据
-export async function generateMetadata({ 
-  params,
-  searchParams 
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'process' });
-  return {
-    title: `FreeIns - ${t('title')}`
-  };
-}
-
-export default async function Process({ 
-  params,
-  searchParams 
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}) {
-  const { locale } = await params;
+export default async function Process({ params }) {
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: 'process' });
 
   return (

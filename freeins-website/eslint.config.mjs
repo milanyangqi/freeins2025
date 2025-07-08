@@ -9,8 +9,14 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+  import globals from 'globals';
+import pluginJs from '@eslint/js';
+
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  { ignores: ['**/.next/**', '**/node_modules/**'] },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     rules: {
       '@typescript-eslint/no-unused-vars': 'off'

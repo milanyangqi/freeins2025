@@ -6,18 +6,12 @@ import Footer from '@/components/Footer';
 import { locales } from '@/lib/i18n';
 
 // 预生成所有支持的语言路径
-export function generateStaticParams(): { locale: string }[] {
+export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
 // 这个函数会在服务器端运行，用于生成元数据
-export async function generateMetadata({ 
-  params,
-  searchParams 
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}) {
+export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'home' });
   return {
@@ -25,13 +19,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Home({ 
-  params,
-  searchParams 
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}) {
+export default async function Home({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'home' });
   const common = await getTranslations({ locale, namespace: 'common' });

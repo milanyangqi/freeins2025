@@ -12,8 +12,8 @@ export type AppPageProps = {
 
 export type AppGenerateMetadata = (
   { params, searchParams }: {
-    params: Promise<PageParams>;
-    searchParams?: Promise<Record<string, string | string[]>>;
+    params: PageParams;
+    searchParams?: Record<string, string | string[]>;
   },
   parent?: ResolvingMetadata
 ) => Promise<Metadata>;

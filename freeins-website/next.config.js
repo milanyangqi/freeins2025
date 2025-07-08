@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  /* config options here */
+  // 已移除 i18n 配置
 };
 
 module.exports = withNextIntl(nextConfig);

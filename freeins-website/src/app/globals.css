@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局样式可以在这里添加 */
 
 :root {
   --background: #ffffff;

@@ -1,9 +1,41 @@
 version: '3.3'
+
 services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: freeins
+      POSTGRES_PASSWORD: freeins_password
+      POSTGRES_DB: freeins_cms
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./freeins-backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - DATABASE_URL=postgresql://freeins:freeins_password@db:5432/freeins_cms?schema=public
+      - JWT_SECRET=your-secret-key
+    depends_on:
+      - db
+    restart: unless-stopped
+
   web:
     build:
       context: ./freeins-website
       dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000/api
+    depends_on:
+      - backend
     restart: unless-stopped
+
+volumes:
+  postgres_data:

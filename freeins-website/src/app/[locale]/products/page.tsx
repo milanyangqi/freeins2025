@@ -4,34 +4,19 @@ import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { locales } from '@/lib/i18n';
 
-// 预生成所有支持的语言路径
-export function generateStaticParams(): { locale: string }[] {
-  return locales.map((locale) => ({ locale }));
-}
+export const dynamic = 'force-dynamic';
 
 // 这个函数会在服务器端运行，用于生成元数据
-export async function generateMetadata({ 
-  params,
-  searchParams 
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}) {
-  const { locale } = await params;
+export async function generateMetadata({ params }) {
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: 'products' });
   return {
     title: `FreeIns - ${t('title')}`
   };
 }
 
-export default async function Products({ 
-  params,
-  searchParams 
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}) {
-  const { locale } = await params;
+export default async function Products({ params }) {
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: 'products' });
 
   const productCategories = [

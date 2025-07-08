@@ -16,37 +16,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// 动态生成元数据
-export async function generateMetadata({ 
-  params,
-  searchParams 
-}: { 
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'home' });
-  const common = await getTranslations({ locale, namespace: 'common' });
-  
-  return {
-    title: `FreeIns - ${t('title')}`,
-    description: t('slogan1'),
-  };
-}
-
 export function generateStaticParams(): { locale: string }[] {
   return locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({
-  children,
-  params,
-  searchParams
-}: Readonly<{
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[]>>;
-}>) {
+export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale)) notFound();
