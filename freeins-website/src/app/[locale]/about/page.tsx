@@ -1,30 +1,32 @@
 import { getTranslations } from 'next-intl/server';
+import type { AppGenerateMetadata } from '@/types';
+
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { locales } from '@/lib/i18n';
-import { InferPageParamsType } from 'next-typesafe-url';
-
-type Props = {
-  params: { locale: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
 
 // 预生成所有支持的语言路径
-export function generateStaticParams() {
+export function generateStaticParams(): { locale: string }[] {
   return locales.map((locale) => ({ locale }));
 }
 
 // 这个函数会在服务器端运行，用于生成元数据
-export async function generateMetadata({ params }: Props) {
-  const locale = params.locale;
+export const generateMetadata: AppGenerateMetadata = async ({ params }) => {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'about' });
   return {
     title: `FreeIns - ${t('title')}`
   };
 }
 
-export default async function About({ params }: Props) {
-  const locale = params.locale;
+export default async function About({ 
+  params,
+  searchParams 
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams?: Promise<Record<string, string | string[]>>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'about' });
 
   return (

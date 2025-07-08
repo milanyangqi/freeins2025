@@ -5,7 +5,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { locales } from '@/lib/i18n';
 import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,9 +17,14 @@ const geistMono = Geist_Mono({
 });
 
 // 动态生成元数据
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const resolvedParams = await Promise.resolve(params);
-  const locale = resolvedParams.locale;
+export async function generateMetadata({ 
+  params,
+  searchParams 
+}: { 
+  params: Promise<{ locale: string }>;
+  searchParams?: Promise<Record<string, string | string[]>>;
+}): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'home' });
   const common = await getTranslations({ locale, namespace: 'common' });
   
@@ -30,19 +34,20 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export function generateStaticParams() {
+export function generateStaticParams(): { locale: string }[] {
   return locales.map((locale) => ({ locale }));
 }
 
 export default async function RootLayout({
   children,
-  params
+  params,
+  searchParams
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
+  searchParams?: Promise<Record<string, string | string[]>>;
 }>) {
-  const resolvedParams = await Promise.resolve(params);
-  const locale = resolvedParams.locale;
+  const { locale } = await params;
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale)) notFound();
 
