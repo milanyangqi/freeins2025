@@ -15,4 +15,4 @@ COPY --from=builder /app/.next/server/app /usr/share/nginx/html/
 COPY public/index.html /usr/share/nginx/html/index.html
 # 复制 nginx 配置
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
+EXPOSE 3008
